@@ -33,7 +33,7 @@ def load_config(file_path):
 def main():
     global patterns
     # Load configuration
-    config = load_config('config.yaml')
+    config = load_config('/etc/syslog-flow/config.yaml')
 
     # Prepare regex patterns and ports
     patterns = []
