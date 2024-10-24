@@ -20,7 +20,7 @@ class SyslogRequestHandler(socketserver.BaseRequestHandler):
     def forward_log(self, log, port):
         # Create a syslog UDP socket for forwarding
         with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as forward_sock:
-            forward_sock.sendto(log.encode(), ('localhost', port))
+            forward_sock.sendto(log.encode(), ('127.0.0.1', port))
             print(f'Forwarded log to port {port}')
 
 
