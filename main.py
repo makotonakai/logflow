@@ -43,7 +43,7 @@ def main():
     # Create a UDP server to listen for incoming syslog messages
     server = socketserver.UDPServer(('0.0.0.0', 514), SyslogRequestHandler)
     print('Listening for incoming syslog messages on port 514...')
-    
+
     try:
         server.serve_forever()  # Start the server
     except KeyboardInterrupt:
@@ -53,5 +53,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
