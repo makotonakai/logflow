@@ -7,7 +7,6 @@ class SyslogRequestHandler(socketserver.BaseRequestHandler):
     def handle(self):
         data = self.request[0].strip()  # Get the data sent to the server
         log = data.decode()
-        print(f'Received log: {log}')
 
         # Match the log against the patterns
         for pattern, port in patterns:
