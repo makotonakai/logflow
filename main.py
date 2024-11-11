@@ -1,7 +1,6 @@
-import re
 import socket
 import socketserver
-import yaml
+from utils import load_config, process_config
 
 
 class SyslogRequestHandler(socketserver.BaseRequestHandler):
@@ -24,21 +23,11 @@ class SyslogRequestHandler(socketserver.BaseRequestHandler):
             print(f'Forwarded log to port {port}')
 
 
-def load_config(file_path):
-    with open(file_path, 'r') as file:
-        config = yaml.safe_load(file)
-    return config
-
-
 def main():
     global patterns
     # Load configuration
     config = load_config('/etc/syslog-flow/config.yaml')
-
-    # Prepare regex patterns and ports
-    patterns = []
-    for item in config['input']:
-        patterns.append((re.compile(item['regex']), item['port']))
+    patterns = process_config(config)
 
     # Create a UDP server to listen for incoming syslog messages
     server = socketserver.UDPServer(('0.0.0.0', 514), SyslogRequestHandler)
