@@ -26,7 +26,7 @@ class SyslogRequestHandler(socketserver.BaseRequestHandler):
 def main():
     global patterns
     # Load configuration
-    config = load_config('/etc/syslog-flow/config.yaml')
+    config = load_config('/etc/logflow/logflow.yaml')
     patterns = process_config(config)
 
     # Create a UDP server to listen for incoming syslog messages
