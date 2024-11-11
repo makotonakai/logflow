@@ -13,13 +13,15 @@ RUN apt-get update && \
   rm -rf /var/lib/apt/lists/*
 
 # Copy the application files
-COPY . /app
+COPY *.py /app
+RUN mkdir -p /etc/logflow
+COPY logflow.yaml /etc/logflow
 
 # Set the entry point for the logflow command
 RUN chmod +x /app/main.py  # Make sure main.py is executable
 
 # Expose any required ports
-EXPOSE 514 40000 40001
+EXPOSE 40000 40001 40002
 
 # Run logflow with specified configuration
 ENTRYPOINT ["python3", "/app/main.py"]
